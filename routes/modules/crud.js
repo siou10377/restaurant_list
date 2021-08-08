@@ -15,6 +15,14 @@ router.post("/new", (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 設定 show 頁面路由
+router.get('/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurants => res.render('show', { restaurants }))
+    .catch(error => console.log(error))
+})
 
 
 
