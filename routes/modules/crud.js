@@ -52,4 +52,15 @@ router.put('/:id/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 設定 delete 路由
+router.delete('/:id/', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurants => {
+      return restaurants.remove()
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 module.exports = router

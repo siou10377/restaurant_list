@@ -49,8 +49,8 @@
                   <a href="./restaurants/{{this._id}}">Detail</a>
                 </div>
                 <div class="col-4">
-                  <form action="./restaurants/{{this._id}}/delete" method="POST">
-                    <button type="submit" class="btn btn-danger btn-sm">delete</button>
+                  <form action="./restaurants/{{this._id}}?_method=DELETE" method="POST" class="btnForm">
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirmBtn()">delete</button>
                   </form>
                 </div>
               </div>
@@ -60,6 +60,17 @@
         </a>
         {{/each}}
       </div>
+
+      <script>
+        function confirmBtn() {
+          const yes = confirm('確定要刪除嗎？')
+          if (yes) {
+            return true
+          } else {
+            return false
+          }
+        }
+      </script>
     </div>
   </div>
 </div>
