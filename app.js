@@ -6,6 +6,7 @@ const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const routers = require('./routes')
 const session = require('express-session')
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -13,6 +14,13 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(bodyParser.urlencoded({ extended: true }))
+
+usePassport(app)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 app.use(routers)
 app.use(session({
   secret: 'ThisIsMySecret',
