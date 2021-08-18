@@ -11,5 +11,14 @@ router.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+router.get("/search", (req, res) => {
+  const keyword = new RegExp(req.query.keyword.trim(), 'i')
+  Restaurant.find({ $or: [{ name: keyword }, { category: keyword }] })
+    .lean()
+    .then(restaurants => res.render("index", { restaurants }))
+    .catch(error => console.log(error))
+})
+
+
 
 module.exports = router

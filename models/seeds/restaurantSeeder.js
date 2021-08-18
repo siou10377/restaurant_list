@@ -15,7 +15,7 @@ const SEED_USERS = [{
 },
 {
   name: 'user2',
-  email: 'user1@example.com',
+  email: 'user2@example.com',
   password: '12345678',
   belongRestaurants: [4, 5, 6]
 }]
